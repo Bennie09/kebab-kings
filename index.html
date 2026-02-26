@@ -1,90 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-    
-    <div class="container">
-        <main class="main-content">
-            <header>
-                <div class="logo-area">
-                    <img src="https://via.placeholder.com/50x50?text=K" alt="Logo" class="logo-img">
-                    <h1 class="brand-name">KEBAB <span class="thin">KINGS</span></h1>
-                </div>
-                <h2 class="page-title">KEBAB KINGS ORDER SYSTEM</h2>
-            </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kebab Kings Order System</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <header>
+        <div class="logo-section">
+          <img
+            src="assets/images/Kebab Kings Logo.png"
+            width="194"
+            height="134"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <h1 class="page-title">Kebab Kings Order System</h1>
+        <div style="width: 100px"></div>
+      </header>
 
-            <nav class="category-nav">
-                <ul class="nav-links">
-                    <li><a href="#">All</a></li>
-                    <li class="active"><a href="#">Kebabs</a></li>
-                    <li><a href="#">Pizzas</a></li>
-                    <li><a href="#">Drinks</a></li>
-                    <li><a href="#">Sides</a></li>
-                </ul>
-                <div class="search-bar">
-                    <input type="text" placeholder="">
-                    <button>Search</button>
-                </div>
-            </nav>
+      <div class="top-nav">
+        <nav>
+          <a href="#">All</a>
+          <a href="#" class="active">Kebabs</a>
+          <a href="#">Pizzas</a>
+          <a href="#">Drinks</a>
+          <a href="#">Sides</a>
+        </nav>
 
-            <section class="product-grid">
-                <div class="card">
-                    <div class="image-container">
-                        <span class="price-tag">£9.98</span>
-                        <img src="https://via.placeholder.com/200x150" alt="Doner Kebab">
-                    </div>
-                    <div class="card-info">
-                        <h3>Doner Kebab</h3>
-                        <button class="add-btn">Add to order</button>
-                    </div>
-                </div>
-                </section>
-        </main>
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." />
+          <button class="search-btn">Search</button>
+        </div>
+      </div>
 
-        <aside class="sidebar">
-            <h2 class="summary-title">ORDER SUMMARY</h2>
-            <p class="item-count">6 Items</p>
-
-            <div class="order-list">
-                <div class="order-item">
-                    <img src="https://via.placeholder.com/60" alt="thumb">
-                    <div class="order-details">
-                        <h4>Doner Kebab</h4>
-                        <p>Price : <strong>£9.98</strong></p>
-                    </div>
-                    <div class="order-actions">
-                        <span class="remove-text">🗑 Remove</span>
-                        <div class="qty-control">
-                            <button class="qty-btn plus">+</button>
-                            <span class="qty-val">5</span>
-                            <button class="qty-btn minus">-</button>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-            <div class="sidebar-footer">
-                <div class="total-row">
-                    <span>Total Price :</span>
-                    <span class="total-amount">£47.65</span>
-                </div>
-                <button class="confirm-btn">Confirm Order</button>
-            </div>
-        </aside>
+      <div class="menu-grid" id="items-menu">
+        <div class="food-card">
+          <span class="price-tag">£9.98</span>
+          <img
+            src="assets/images/doner-kebab.png"
+            alt="Doner Kebab"
+            class="food-img"
+          />
+          <div class="food-info">
+            <h3 id="item-name">Doner Kebab</h3>
+            <button class="add-btn">Add to order</button>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <aside class="sidebar">
+      <h2>ORDER SUMMARY</h2>
+      <p class="item-count"><span id="order-count">0</span> Items</p>
 
+      <div class="order-items" id="order-items">
+        <div class="order-card">
+          <img src="assets/images/doner-kebab.png" alt="Doner" />
+          <div class="order-details">
+            <h4>Doner Kebab</h4>
+            <p>Price : £9.98</p>
+          </div>
+          <div class="order-actions">
+            <a href="#" class="remove-link"
+              ><img src="assets/images/bin.png" alt="" />Remove</a
+            >
+            <div class="qty-controls">
+              <button class="qty-btn">&plus;</button>
+              <span class="qty-val">5</span>
+              <button class="qty-btn">&minus;</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="summary-footer">
+        <div class="total-row">
+          <span class="total-label">Total Price :</span>
+          <span class="total-price" id="total-price">£47.65</span>
+        </div>
+        <button class="confirm-btn">Confirm Order</button>
+      </div>
+    </aside>
 
-
-
-    
     <!-- Javascript -->
     <script src="assets/javascript/script.js"></script>
-</body>
+  </body>
 </html>
