@@ -35,10 +35,16 @@ orders = [];
 
 function displayOrder() {
   let orderItems = document.getElementById("order-items");
+  totalPrice = document.getElementById("total-price");
 
   orderItems.innerHTML = "";
+  let totalAccumulator = 0;
 
   orders.forEach((order, index) => {
+    let itemTotalPrice = order.price * order.quantity;
+
+    totalAccumulator += itemTotalPrice;
+
     let orderCard = document.createElement("div");
     orderCard.classList.add("order-card");
 
@@ -56,12 +62,16 @@ function displayOrder() {
       <div class="qty-controls">
         <button class="qty-btn"  onclick="increaseOrder(${index})">&plus;</button>
         <span class="qty-val">${order.quantity}</span>
-        <button class="qty-btn"  onclick="decreaseOrder(${index})">&minus;</button>
+        <button class="qty-btn" onclick="decreaseOrder(${index})" ${
+      order.quantity === 1 ? "disabled" : ""
+    }>&minus;</button>
       </div>
     `;
 
     orderItems.appendChild(orderCard);
   });
+
+  totalPrice.textContent = `£${totalAccumulator.toFixed(2)}`;
 }
 
 function displayItems() {
@@ -92,8 +102,6 @@ function displayItems() {
 }
 
 function addItem(index) {
-  let orderCount = document.getElementById("order-count");
-
   let itemArray = items[index];
   itemArray["quantity"] = 1;
 
@@ -107,7 +115,7 @@ function addItem(index) {
     orders.push({ ...itemArray });
   }
 
-  orderCount.textContent = orders.length;
+  updateItemsCount();
 
   console.log(orders);
 
@@ -122,6 +130,37 @@ function increaseOrder(index) {
   console.log(item);
 
   displayOrder();
+}
+
+function decreaseOrder(index) {
+  let item = orders[index];
+
+  if (item.quantity >= 2) {
+    item.quantity -= 1;
+  }
+
+  console.log(item);
+
+  displayOrder();
+}
+
+function removeOrder(index) {
+  orders.splice(index, 1);
+
+  updateItemsCount();
+
+  displayOrder();
+}
+
+function updateItemsCount() {
+  let orderCount = document.getElementById("order-count");
+  orderCount.textContent = orders.length;
+}
+
+function confirmBtn() {
+  orders = [];
+  displayOrder();
+  updateItemsCount();
 }
 
 displayOrder();

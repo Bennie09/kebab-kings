@@ -275,6 +275,12 @@ nav a.active {
   opacity: 0.9;
 }
 
+.qty-btn:disabled {
+  background-color: #d3d3d3;
+  color: #646464;
+  cursor: not-allowed;
+}
+
 .qty-val {
   background: #e8e8e8;
   color: #333;
