@@ -1,37 +1,129 @@
 items = [
+  // 🌯 Kebabs
   {
     name: "Doner Kebab",
-    price: 9.98,
-    category: "kebab",
-    img: "doner-kebab.png",
-  },
-  {
-    name: "Doner Kebab",
-    price: 9.98,
-    category: "kebab",
-    img: "doner-kebab.png",
-  },
-  {
-    name: "Doner Kebab",
-    price: 9.98,
-    category: "kebab",
-    img: "doner-kebab.png",
-  },
-  {
-    name: "Doner Kebab",
-    price: 9.98,
+    price: 8.99,
     category: "kebab",
     img: "doner-kebab.png",
   },
   {
     name: "Chicken Kebab",
-    price: 11.98,
+    price: 9.49,
     category: "kebab",
     img: "chicken-kebab.png",
+  },
+  {
+    name: "Lamb Kebab",
+    price: 9.99,
+    category: "kebab",
+    img: "lamb-kebab.png",
+  },
+  {
+    name: "Mixed Kebab",
+    price: 10.99,
+    category: "kebab",
+    img: "mixed-kebab.png",
+  },
+
+  // 🍕 Pizzas
+  {
+    name: "Margherita Pizza",
+    price: 8.49,
+    category: "pizza",
+    img: "margherita-pizza.png",
+  },
+  {
+    name: "Pepperoni Pizza",
+    price: 9.49,
+    category: "pizza",
+    img: "pepperoni-pizza.png",
+  },
+  {
+    name: "BBQ Chicken Pizza",
+    price: 10.49,
+    category: "pizza",
+    img: "bbq-chicken-pizza.png",
+  },
+  {
+    name: "Meat Feast Pizza",
+    price: 11.49,
+    category: "pizza",
+    img: "meat-feast-pizza.png",
+  },
+
+  // 🥤 Drinks
+  {
+    name: "Coca-Cola",
+    price: 1.99,
+    category: "drink",
+    img: "coca-cola.png",
+  },
+  {
+    name: "Fanta",
+    price: 1.99,
+    category: "drink",
+    img: "fanta.png",
+  },
+  {
+    name: "Sprite",
+    price: 1.99,
+    category: "drink",
+    img: "sprite.png",
+  },
+  {
+    name: "Still Water",
+    price: 1.49,
+    category: "drink",
+    img: "water.png",
+  },
+
+  // 🍟 Sides
+  {
+    name: "Chips",
+    price: 3.49,
+    category: "side",
+    img: "chips.png",
+  },
+  {
+    name: "Garlic Bread",
+    price: 3.99,
+    category: "side",
+    img: "garlic-bread.png",
+  },
+  {
+    name: "Onion Rings",
+    price: 3.79,
+    category: "side",
+    img: "onion-rings.png",
+  },
+  {
+    name: "Chicken Nuggets",
+    price: 4.49,
+    category: "side",
+    img: "chicken-nuggets.png",
   },
 ];
 
 orders = [];
+let searchQuery = "";
+let currentCategory = "all";
+
+function handleSearch() {
+  const input = document.getElementById("search-input");
+  searchQuery = input.value.toLowerCase();
+  displayItems();
+}
+
+function filterByCategory(category, element) {
+  currentCategory = category;
+
+  document.querySelectorAll(".top-nav nav a").forEach((link) => {
+    link.classList.remove("active");
+  });
+  element.classList.add("active");
+
+  displayItems();
+}
 
 function displayOrder() {
   let orderItems = document.getElementById("order-items");
@@ -50,7 +142,7 @@ function displayOrder() {
 
     orderCard.innerHTML = `
 
-    <img src="assets/images/${order.img}" alt="Doner" />
+    <img src="assets/images/item-images/${order.img}" alt="${order.name}" />
     <div class="order-details">
       <h4>${order.name}</h4>
       <p>Price : £${order.price}</p>
@@ -76,24 +168,31 @@ function displayOrder() {
 
 function displayItems() {
   let itemsMenu = document.getElementById("items-menu");
-
   itemsMenu.innerHTML = "";
 
-  items.forEach((item, index) => {
+  const filteredItems = items.filter((item) => {
+    const matchesCategory =
+      currentCategory === "all" || item.category === currentCategory;
+    const matchesSearch = item.name.toLowerCase().includes(searchQuery);
+    return matchesCategory && matchesSearch;
+  });
+
+  filteredItems.forEach((item) => {
+    const originalIndex = items.findIndex((i) => i.name === item.name);
+
     let foodCard = document.createElement("div");
     foodCard.classList.add("food-card");
 
     foodCard.innerHTML = `
-
-        <span class="price-tag">£${item.price}</span>
+        <span class="price-tag">£${item.price.toFixed(2)}</span>
           <img
-            src="assets/images/${item.img}"
+            src="assets/images/item-images/${item.img}"
             alt="${item.name}"
             class="food-img"
           />
           <div class="food-info">
             <h3 id="item-name">${item.name}</h3>
-            <button class="add-btn" onclick="addItem(${index})">Add to order</button>
+            <button class="add-btn" onclick="addItem(${originalIndex})">Add to order</button>
           </div>
     `;
 

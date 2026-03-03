@@ -27,59 +27,35 @@
       </header>
 
       <div class="top-nav">
-        <nav>
-          <a href="#">All</a>
-          <a href="#" class="active">Kebabs</a>
-          <a href="#">Pizzas</a>
-          <a href="#">Drinks</a>
-          <a href="#">Sides</a>
+        <nav id="category-filters">
+          <a href="#" class="active" onclick="filterByCategory('all', this)"
+            >All</a
+          >
+          <a href="#" onclick="filterByCategory('kebab', this)">Kebabs</a>
+          <a href="#" onclick="filterByCategory('pizza', this)">Pizzas</a>
+          <a href="#" onclick="filterByCategory('drink', this)">Drinks</a>
+          <a href="#" onclick="filterByCategory('side', this)">Sides</a>
         </nav>
 
         <div class="search-bar">
-          <input type="text" placeholder="Search..." />
-          <button class="search-btn">Search</button>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search..."
+            onkeyup="handleSearch()"
+          />
+          <button class="search-btn" onclick="handleSearch()">Search</button>
         </div>
       </div>
 
-      <div class="menu-grid" id="items-menu">
-        <div class="food-card">
-          <span class="price-tag">£9.98</span>
-          <img
-            src="assets/images/doner-kebab.png"
-            alt="Doner Kebab"
-            class="food-img"
-          />
-          <div class="food-info">
-            <h3 id="item-name">Doner Kebab</h3>
-            <button class="add-btn">Add to order</button>
-          </div>
-        </div>
-      </div>
+      <div class="menu-grid" id="items-menu"></div>
     </div>
 
     <aside class="sidebar">
       <h2>ORDER SUMMARY</h2>
       <p class="item-count"><span id="order-count">0</span> Items</p>
 
-      <div class="order-items" id="order-items">
-        <div class="order-card">
-          <img src="assets/images/doner-kebab.png" alt="Doner" />
-          <div class="order-details">
-            <h4>Doner Kebab</h4>
-            <p>Price : £9.98</p>
-          </div>
-          <div class="order-actions">
-            <a href="#" class="remove-link"
-              ><img src="assets/images/bin.png" alt="" />Remove</a
-            >
-            <div class="qty-controls">
-              <button class="qty-btn">&plus;</button>
-              <span class="qty-val">5</span>
-              <button class="qty-btn">&minus;</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="order-items" id="order-items"></div>
 
       <div class="summary-footer">
         <div class="total-row">
