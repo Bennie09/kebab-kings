@@ -206,6 +206,80 @@ nav a.active {
   letter-spacing: 1px;
 }
 
+/* --- Staff Info & Order ID Styles --- */
+
+.order-id-container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.order-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+/* --- Pill Toggle Styles --- */
+
+.staff-info-box {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.group-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fce4e4;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.type-pill-container {
+  display: flex;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px;
+  border-radius: 50px;
+}
+
+.type-pill {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 50px;
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* The 'Selected' Pill State */
+.type-pill.active {
+  background: white;
+  color: var(--primary-red);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Adjusting Order Number styling for better visibility */
+#order-number-display {
+  font-size: 32px;
+  font-weight: 800;
+  color: white;
+  margin-top: 5px;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
 .item-count {
   text-align: left;
   font-size: 16px;

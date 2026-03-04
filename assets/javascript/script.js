@@ -108,6 +108,23 @@ orders = [];
 let searchQuery = "";
 let currentCategory = "all";
 
+function orderNumberGen() {
+  orderNo = document.getElementById("order-number");
+
+  orderNo.textContent = Math.floor(Math.random() * 150);
+
+  return orderNo;
+}
+
+function setOrderType(type, element) {
+  const buttons = document.querySelectorAll(".type-pill");
+  buttons.forEach((btn) => btn.classList.remove("active"));
+
+  element.classList.add("active");
+
+  console.log("Selected order type:", type);
+}
+
 function handleSearch() {
   const input = document.getElementById("search-input");
   searchQuery = input.value.toLowerCase();
@@ -201,6 +218,10 @@ function displayItems() {
 }
 
 function addItem(index) {
+  if (orders.length === 0) {
+    orderNumberGen();
+  }
+
   let itemArray = items[index];
   itemArray["quantity"] = 1;
 
@@ -211,12 +232,10 @@ function addItem(index) {
   if (existingOrder) {
     existingOrder.quantity += 1;
   } else {
-    orders.push({ ...itemArray });
+    orders.push({ ...itemArray, quantity: 1 });
   }
 
   updateItemsCount();
-
-  console.log(orders);
 
   displayOrder();
 }
@@ -225,8 +244,6 @@ function increaseOrder(index) {
   let item = orders[index];
 
   item.quantity += 1;
-
-  console.log(item);
 
   displayOrder();
 }
@@ -237,8 +254,6 @@ function decreaseOrder(index) {
   if (item.quantity >= 2) {
     item.quantity -= 1;
   }
-
-  console.log(item);
 
   displayOrder();
 }
@@ -256,10 +271,52 @@ function updateItemsCount() {
   orderCount.textContent = orders.length;
 }
 
+function printOrder() {
+  if (orders.length === 0) return;
+
+  const orderNum = document.getElementById("order-number").textContent;
+  const totalPrice = document.getElementById("total-price").textContent;
+
+  let fileContent = `--- KEBAB KINGS RECEIPT ---\n`;
+  fileContent += `Order Number: #00${orderNum}\n`;
+  fileContent += `Date: ${new Date().toLocaleString()}\n`;
+  fileContent += `---------------------------\n\n`;
+
+  orders.forEach((item) => {
+    const itemTotal = (item.price * item.quantity).toFixed(2);
+    fileContent += `${item.quantity}x ${item.name} - £${itemTotal}\n`;
+  });
+
+  fileContent += `\n---------------------------\n`;
+  fileContent += `TOTAL PRICE: ${totalPrice}\n`;
+  fileContent += `---------------------------\n`;
+  fileContent += `Thank you for your order!`;
+
+  const blob = new Blob([fileContent], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = `Order_${orderNum}.txt`;
+  document.body.appendChild(link);
+  link.click();
+
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
 function confirmBtn() {
-  orders = [];
-  displayOrder();
-  updateItemsCount();
+  if (orders.length > 0) {
+    printOrder();
+    alert("Order Confirmed!");
+    orders = [];
+    displayOrder();
+    updateItemsCount();
+
+    document.getElementById("order-number").textContent = "---";
+  } else {
+    alert("Add an Item to Order List!!!");
+  }
 }
 
 displayOrder();

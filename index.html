@@ -52,7 +52,28 @@
     </div>
 
     <aside class="sidebar">
+      <div class="order-id-container">
+        <span class="order-label">Current Order</span>
+        <h3 id="order-number-display">#<span id="order-number">---</span></h3>
+      </div>
+
       <h2>ORDER SUMMARY</h2>
+
+      <div class="staff-info-box">
+        <label class="group-label">Order Type</label>
+        <div class="type-pill-container" id="order-type-selection">
+          <button
+            class="type-pill active"
+            onclick="setOrderType('Takeaway', this)"
+          >
+            🛍️ Takeaway
+          </button>
+          <button class="type-pill" onclick="setOrderType('Dine-in', this)">
+            🏠 Dine-in
+          </button>
+        </div>
+      </div>
+
       <p class="item-count"><span id="order-count">0</span> Items</p>
 
       <div class="order-items" id="order-items"></div>
@@ -60,10 +81,14 @@
       <div class="summary-footer">
         <div class="total-row">
           <span class="total-label">Total Price :</span>
-          <span class="total-price" id="total-price">£47.65</span>
+          <span class="total-price" id="total-price">£0.00</span>
         </div>
-        <button class="confirm-btn" onclick="confirmBtn()">
-          Confirm Order
+        <button
+          class="confirm-btn"
+          id="confirm-order-btn"
+          onclick="confirmBtn()"
+        >
+          Confirm & Print
         </button>
       </div>
     </aside>
